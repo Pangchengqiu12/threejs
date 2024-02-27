@@ -1,5 +1,5 @@
 <template>
-  <div>关于</div>
+  <div>测试</div>
 </template>
 
 <script>
