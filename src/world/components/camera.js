@@ -1,6 +1,12 @@
 import { PerspectiveCamera } from 'three';
 
 function createCamera() {
+  /*
+  fov，或视野：相机的视野有多宽，以度为单位。
+  aspect，或纵横比：场景的宽度与高度的比率。
+  near, 或近剪裁平面：任何比这更靠近相机的东西都是不可见的。
+  far，或远剪裁平面：任何比这更远离相机的东西都是不可见的。
+  */
   const camera = new PerspectiveCamera(
     35, // fov = Field Of View
     1, // aspect ratio (dummy value)
