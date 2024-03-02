@@ -14,6 +14,7 @@
 //   }
 // }
 // export { Resizer };
+import { debounce } from '../../utils/utils';
 const setSize = (container, camera, renderer) => {
   camera.aspect = container.clientWidth / container.clientHeight;
   camera.updateProjectionMatrix();
@@ -21,14 +22,18 @@ const setSize = (container, camera, renderer) => {
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.setPixelRatio(window.devicePixelRatio);
 };
+function resize(container, camera, renderer, _that) {
+  setSize(container, camera, renderer);
+  _that.onResize();
+}
+const dbResize = debounce(resize, 300);
 
 class Resizer {
   constructor(container, camera, renderer) {
     // set initial size on load
+    const _that = this;
     window.addEventListener('resize', () => {
-      // set the size again if a resize occurs
-      setSize(container, camera, renderer);
-      this.onResize();
+      dbResize(container, camera, renderer, _that);
     });
   }
   onResize() {}

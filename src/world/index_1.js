@@ -96,12 +96,13 @@ class World {
   constructor(container) {
     this.camera = createCamera();
     this.scene = createScene();
-    this.renderer = createRenderer();
+    this.renderer = createRenderer(container);
     // 2. Render the scene
+    container.append(this.renderer.domElement);
+
     this.cube = createCube();
     this.light = createLights();
     this.scene.add(this.cube, this.light);
-    container.append(this.renderer.domElement);
     const resizer = new Resizer(container, this.camera, this.renderer);
     resizer.onResize = () => {
       this.render();

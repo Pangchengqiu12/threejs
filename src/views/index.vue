@@ -3,14 +3,18 @@
 </template>
 
 <script setup>
-// import { Scene, PerspectiveCamera, Color, BoxGeometry, MeshBasicMaterial, Mesh, WebGLRenderer } from 'three';
+import { Scene, PerspectiveCamera, Color, BoxGeometry, MeshBasicMaterial, Mesh, WebGLRenderer } from 'three';
 import { World } from '@/world/index_1.js';
+// // import { nextTick } from 'vue';
 onMounted(() => {
   const contanier = document.querySelector('#scene-container');
   const world = new World(contanier);
+  //   setTimeout(() => {
   world.render();
+  //   }, 1000);
+
   // console.log(world.scene.children);
-  console.log(world.cube.position);
+  // console.log(world.cube.position);
   // world.render();
   // const scene = new Scene();
   // scene.background = new Color('skyblue');

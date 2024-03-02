@@ -12,14 +12,14 @@ class World {
   constructor(container) {
     camera = createCamera();
     scene = createScene();
-    renderer = createRenderer();
+    renderer = createRenderer(container);
     // 2. Render the scene
     container.append(renderer.domElement);
     const cube = createCube();
     const light = createLights();
 
     scene.add(cube, light);
-    const resizer = new Resizer(container, camera, renderer);
+    // const resizer = new Resizer(container, camera, renderer);
   }
   render() {
     // draw a single frame
