@@ -9,11 +9,7 @@ import { World } from '@/world/index_1.js';
 onMounted(() => {
   const contanier = document.querySelector('#scene-container');
   const world = new World(contanier);
-  //   setTimeout(() => {
-  world.render();
-  //   }, 1000);
-
-  // console.log(world.scene.children);
+  world.start();
   // console.log(world.cube.position);
   // world.render();
   // const scene = new Scene();

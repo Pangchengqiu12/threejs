@@ -83,34 +83,47 @@ import { createScene } from './components/scene.js';
 import { createLights } from './components/lights.js';
 import { createRenderer } from './systems/renderer.js';
 import { Resizer } from './systems/resizer.js';
+import { Loop } from './systems/Loop.js';
 // let camera;
 // let renderer;
 // let scene;
+/**
+ * @class World
+ * @description Create an instance of the World app
+ * @param {object} 容器对象
+ * @method render 渲染
+ * @method start 动画启动
+ * @method stop 动画停止
+ */
 class World {
-  camera;
-  renderer;
-  scene;
-  cube;
-  light;
   // 1. Create an instance of the World app
   constructor(container) {
     this.camera = createCamera();
     this.scene = createScene();
-    this.renderer = createRenderer(container);
+    this.renderer = createRenderer(container, this.scene, this.camera);
+    this.loop = new Loop(this.camera, this.scene, this.renderer);
     // 2. Render the scene
     container.append(this.renderer.domElement);
 
     this.cube = createCube();
     this.light = createLights();
+    this.loop.updatables.push(this.cube);
     this.scene.add(this.cube, this.light);
     const resizer = new Resizer(container, this.camera, this.renderer);
-    resizer.onResize = () => {
-      this.render();
-    };
+    // resizer.onResize = () => {
+    //   this.render();
+    // };
   }
   render() {
     // draw a single frame
     this.renderer.render(this.scene, this.camera);
+  }
+  start() {
+    this.loop.start();
+  }
+
+  stop() {
+    this.loop.stop();
   }
 }
 
