@@ -84,6 +84,7 @@ import { createLights } from './components/lights.js';
 import { createRenderer } from './systems/renderer.js';
 import { Resizer } from './systems/resizer.js';
 import { Loop } from './systems/Loop.js';
+import { createControls } from './systems/controls.js';
 // let camera;
 // let renderer;
 // let scene;
@@ -105,14 +106,22 @@ class World {
     // 2. Render the scene
     container.append(this.renderer.domElement);
 
+    const controls = createControls(this.camera, this.renderer.domElement);
+    // controls.target.set(1, 2, 3);
+
     this.cube = createCube();
-    this.light = createLights();
-    this.loop.updatables.push(this.cube);
-    this.scene.add(this.cube, this.light);
+    controls.target.copy(this.cube.position);
+    this.ambientLight = createLights().ambientLight;
+    this.light = createLights().light;
+    this.loop.updatables.push(controls);
+    this.scene.add(this.cube, this.ambientLight);
     const resizer = new Resizer(container, this.camera, this.renderer);
-    // resizer.onResize = () => {
-    //   this.render();
-    // };
+    controls.addEventListener('change', () => {
+      this.render();
+    });
+    resizer.onResize = () => {
+      this.render();
+    };
   }
   render() {
     // draw a single frame

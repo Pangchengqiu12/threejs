@@ -1,4 +1,7 @@
 <template>
+  <!-- <div>
+    <img src="../assets/textures/uv-test-bw.jpg" alt="" />
+  </div> -->
   <div id="scene-container"></div>
 </template>
 
@@ -9,9 +12,12 @@ import { World } from '@/world/index_1.js';
 onMounted(() => {
   const contanier = document.querySelector('#scene-container');
   const world = new World(contanier);
-  world.start();
+  // world.start();
   // console.log(world.cube.position);
-  // world.render();
+  world.render();
+  setTimeout(() => {
+    world.render();
+  }, 1);
   // const scene = new Scene();
   // scene.background = new Color('skyblue');
   // const camera = new PerspectiveCamera(35, contanier.clientWidth / contanier.clientHeight, 0.1, 100);
